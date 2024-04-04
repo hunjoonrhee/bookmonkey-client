@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {IBook} from "../book";
 
 @Component({
@@ -9,8 +9,16 @@ import {IBook} from "../book";
   styleUrl: './book-card.component.scss'
 })
 export class BookCardComponent {
+
+  @Input({required: true}) content!: IBook;
+  @Output() detailClick = new EventEmitter<IBook>();
   linkStyle = {
     backgroundColor: 'orange'
   }
-  @Input({required: true}) content!: IBook;
+  handleDetailClick(e: MouseEvent) {
+    console.log(e);
+    const inputElement = e.target as HTMLAnchorElement
+    console.log(inputElement)
+    this.detailClick.emit(this.content)
+  }
 }

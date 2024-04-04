@@ -1,5 +1,4 @@
 <h3>{{ content.title }}</h3>
 <h4>{{ content.author }}</h4>
-<a href="https://de.wikipedia.org/wiki/Moby-Dick" target="_blank"
-   [style]="linkStyle">details</a>
+    <a [style]="linkStyle" (click)="handleDetailClick($event)">details</a>
 <p [style.color]="'red'">{{ content.abstract }}</p>
