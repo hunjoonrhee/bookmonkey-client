@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {IBook} from "../book";
 
 @Component({
   selector: 'app-book-card',
@@ -11,5 +12,5 @@ export class BookCardComponent {
   linkStyle = {
     backgroundColor: 'orange'
   }
-  @Input() content: any;
+  @Input({required: true}) content!: IBook;
 }
