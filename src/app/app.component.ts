@@ -1,22 +1,17 @@
 import { Component } from '@angular/core';
-import {CommonModule, NgFor} from "@angular/common";
+import {CommonModule} from "@angular/common";
 import {BookCardComponent} from "./book-card/book-card.component";
 import {IBook} from "./book";
+import {BookFilterPipe} from "./book-filter/book-filter.pipe";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, BookCardComponent],
+  imports: [CommonModule, BookCardComponent, BookFilterPipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  // book: IBook = {
-  //   title: 'How to win friends',
-  //   author: 'Dale Carnegie',
-  //   abstract: 'In this book ...'
-  // };
-
   books: IBook[] = [
     {
       title: 'How to win friends',
@@ -34,8 +29,27 @@ export class AppComponent {
       abstract: "START WITH WHY shows that the leaders who've ..."
     }
   ];
+  bookSearchTerm?: string;
+
+  booksContainer = {
+    display: 'flex',
+    flexDirection: 'column',
+    border: 'solid 2px black',
+    width: '500px',
+    alignItems: 'center'
+  }
+  inputStyle = {
+    margin: '10px',
+    padding: '10px',
+    width: '180px'
+  }
 
   goToBookDetails(book: IBook) {
     console.table(book)
+  }
+
+  updateBookSearchTerm(e: Event): string {
+    this.bookSearchTerm = (e.target as HTMLInputElement).value
+    return this.bookSearchTerm
   }
 }
