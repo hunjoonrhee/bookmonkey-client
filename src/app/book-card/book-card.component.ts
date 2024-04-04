@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './book-card.component.scss'
 })
 export class BookCardComponent {
-
+  linkStyle = {
+    backgroundColor: 'orange'
+  }
 }
