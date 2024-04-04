@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-book-card',
@@ -11,4 +11,5 @@ export class BookCardComponent {
   linkStyle = {
     backgroundColor: 'orange'
   }
+  @Input() content: any;
 }
