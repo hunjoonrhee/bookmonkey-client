@@ -10,7 +10,7 @@ export class BookFilterPipe implements PipeTransform {
   transform(books: IBook[], searchTerm?: string): IBook[] {
 
     if (searchTerm) {
-      return books.filter((book) => book.title.includes(searchTerm));
+      return books.filter((book) => book.title.toLowerCase().includes(searchTerm.toLowerCase()));
     } else {
       return []
     }
