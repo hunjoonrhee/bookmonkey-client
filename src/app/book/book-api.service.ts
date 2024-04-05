@@ -23,8 +23,6 @@ export class BookApiService {
     }
   ];
 
-  constructor() { }
-
   getAll() {
     return this.books;
   }
