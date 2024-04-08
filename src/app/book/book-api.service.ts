@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {IBook} from "./book";
 import {Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
@@ -9,8 +9,7 @@ import {HttpClient} from "@angular/common/http";
 export class BookApiService {
 
   private baseUrl = "http://localhost:4730/books"
-  private books: IBook[] = [];
-  constructor(private readonly httpClient: HttpClient) {}
+  private readonly httpClient = inject(HttpClient)
   getAll(): Observable<IBook[]> {
     return this.httpClient.get<IBook[]>(this.baseUrl)
   }
