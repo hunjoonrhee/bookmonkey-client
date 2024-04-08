@@ -23,18 +23,18 @@ export class BookComponent {
   bookSearchTerm?: string;
   private destroyRef = inject(DestroyRef)
 
-  booksContainer = {
-    display: 'flex',
-    flexDirection: 'column',
-    border: 'solid 2px black',
-    width: '500px',
-    alignItems: 'center'
-  }
-  inputStyle = {
-    margin: '10px',
-    padding: '10px',
-    width: '180px'
-  }
+  // booksContainer = {
+  //   display: 'flex',
+  //   flexDirection: 'column',
+  //   border: 'solid 2px black',
+  //   width: '500px',
+  //   alignItems: 'center'
+  // }
+  // inputStyle = {
+  //   margin: '10px',
+  //   padding: '10px',
+  //   width: '180px'
+  // }
 
   goToBookDetails(book: IBook) {
     console.table(book)

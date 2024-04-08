@@ -1,5 +1,7 @@
-<div [style]="booksContainer">
-    <input type="text" (input)="updateBookSearchTerm($event)" [style]="inputStyle" placeholder="Filter books..."/>
+
+    <h2>Welcome to my Book Store</h2>
+    <input type="text" (input)="updateBookSearchTerm($event)" placeholder="Filter books..."/>
+    <hr />
     @if (bookSearchTerm) {
         <app-book-card [content]="book" *ngFor="let book of books$ | async | bookFilter: bookSearchTerm"
                        (detailClick)="goToBookDetails(book)"/>
@@ -7,4 +9,4 @@
         <app-book-card [content]="book" *ngFor="let book of books$ | async"
                        (detailClick)="goToBookDetails(book)"/>
     }
-</div>
+

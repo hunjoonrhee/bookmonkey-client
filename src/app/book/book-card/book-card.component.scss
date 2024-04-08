@@ -1,22 +1,10 @@
-//.container {
-//  display: flex;
-//  flex-direction: column;
-//  justify-content: space-between;
-//  align-items: flex-start;
-//  margin: 20px;
-//  border-style: solid;
-//  border-color: black;
-//  padding: 3px 6px;
-//  max-width: 500px;
-//}
-
 :host {
-  display: block;
   border: solid 2px black;
-  height: 180px;
-  width: 180px;
+  display: block;
   float: left;
   padding: 10px;
-  overflow: hidden;
   margin: 10px;
+  height: 180px;
+  width: 180px;
+  overflow: hidden;
 }
