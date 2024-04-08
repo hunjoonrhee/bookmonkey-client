@@ -23,24 +23,6 @@ export class BookComponent {
   bookSearchTerm?: string;
   private destroyRef = inject(DestroyRef)
 
-  // ngOnInit() {
-  //   // console.log("susubscription2"bscription", this.subscription)
-  //   //     // this.subscription = this.bookApiService.getAll().subscribe({
-  //   //     //   next: data => this.books = data,
-  //   //     // })
-  //   //     // console.log(", this.subscription)
-  //
-  //   this.bookApiService.getAll().pipe(
-  //       takeUntilDestroyed(this.destroyRef)
-  //   ).subscribe({
-  //       next: data => this.books$ = data,
-  // })
-  // }
-
-  // ngOnDestroy() {
-  //   this.subscription.unsubscribe();
-  // }
-
   booksContainer = {
     display: 'flex',
     flexDirection: 'column',
