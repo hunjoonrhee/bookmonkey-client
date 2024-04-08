@@ -4,6 +4,7 @@ import {CommonModule} from "@angular/common";
 import {BookCardComponent} from "../book-card/book-card.component";
 import {BookFilterPipe} from "../book-filter/book-filter.pipe";
 import {BookApiService} from "../book-api.service";
+import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-book',
@@ -16,8 +17,15 @@ import {BookApiService} from "../book-api.service";
 export class BookComponent {
 
   private bookApiService = inject(BookApiService)
-  books: IBook[] = this.bookApiService.getAll();
+  books: IBook[] = [];
   bookSearchTerm?: string;
+
+  constructor() {
+    this.bookApiService.getAll().subscribe({
+      next: (data) => (this.books = data),
+      complete: () => console.log("Fertig"),
+    })
+  }
 
 
   booksContainer = {
