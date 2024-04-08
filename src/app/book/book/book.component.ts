@@ -1,6 +1,6 @@
 import {Component, DestroyRef, inject, OnDestroy, OnInit} from '@angular/core';
 import {IBook} from "../book";
-import {CommonModule} from "@angular/common";
+import {AsyncPipe, CommonModule} from "@angular/common";
 import {BookCardComponent} from "../book-card/book-card.component";
 import {BookFilterPipe} from "../book-filter/book-filter.pipe";
 import {BookApiService} from "../book-api.service";
@@ -15,31 +15,31 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
   templateUrl: './book.component.html',
   styleUrl: './book.component.scss'
 })
-export class BookComponent implements OnInit, OnDestroy {
+export class BookComponent {
 
   private subscription = Subscription.EMPTY
   private bookApiService = inject(BookApiService)
-  books: IBook[] = [];
+  books$: Observable<IBook[]> = this.bookApiService.getAll();
   bookSearchTerm?: string;
   private destroyRef = inject(DestroyRef)
 
-  ngOnInit() {
-    // console.log("susubscription2"bscription", this.subscription)
-    //     // this.subscription = this.bookApiService.getAll().subscribe({
-    //     //   next: data => this.books = data,
-    //     // })
-    //     // console.log(", this.subscription)
+  // ngOnInit() {
+  //   // console.log("susubscription2"bscription", this.subscription)
+  //   //     // this.subscription = this.bookApiService.getAll().subscribe({
+  //   //     //   next: data => this.books = data,
+  //   //     // })
+  //   //     // console.log(", this.subscription)
+  //
+  //   this.bookApiService.getAll().pipe(
+  //       takeUntilDestroyed(this.destroyRef)
+  //   ).subscribe({
+  //       next: data => this.books$ = data,
+  // })
+  // }
 
-    this.bookApiService.getAll().pipe(
-        takeUntilDestroyed(this.destroyRef)
-    ).subscribe({
-        next: data => this.books = data,
-  })
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.subscription.unsubscribe();
+  // }
 
   booksContainer = {
     display: 'flex',
