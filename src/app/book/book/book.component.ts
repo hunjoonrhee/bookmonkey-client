@@ -1,10 +1,11 @@
-import {Component, inject} from '@angular/core';
+import {Component, DestroyRef, inject, OnDestroy, OnInit} from '@angular/core';
 import {IBook} from "../book";
 import {CommonModule} from "@angular/common";
 import {BookCardComponent} from "../book-card/book-card.component";
 import {BookFilterPipe} from "../book-filter/book-filter.pipe";
 import {BookApiService} from "../book-api.service";
 import {Observable, Subscription} from "rxjs";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-book',
@@ -14,19 +15,31 @@ import {Observable, Subscription} from "rxjs";
   templateUrl: './book.component.html',
   styleUrl: './book.component.scss'
 })
-export class BookComponent {
+export class BookComponent implements OnInit, OnDestroy {
 
+  private subscription = Subscription.EMPTY
   private bookApiService = inject(BookApiService)
   books: IBook[] = [];
   bookSearchTerm?: string;
+  private destroyRef = inject(DestroyRef)
 
-  constructor() {
-    this.bookApiService.getAll().subscribe({
-      next: (data) => (this.books = data),
-      complete: () => console.log("Fertig"),
-    })
+  ngOnInit() {
+    // console.log("susubscription2"bscription", this.subscription)
+    //     // this.subscription = this.bookApiService.getAll().subscribe({
+    //     //   next: data => this.books = data,
+    //     // })
+    //     // console.log(", this.subscription)
+
+    this.bookApiService.getAll().pipe(
+        takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
+        next: data => this.books = data,
+  })
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   booksContainer = {
     display: 'flex',
