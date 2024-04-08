@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject} from '@angular/core';
 import {IBook} from "../book";
 import {AsyncPipe, CommonModule} from "@angular/common";
 import {BookCardComponent} from "../book-card/book-card.component";
@@ -21,21 +21,6 @@ export class BookComponent {
   private bookApiService = inject(BookApiService)
   books$: Observable<IBook[]> = this.bookApiService.getAll();
   bookSearchTerm?: string;
-  private destroyRef = inject(DestroyRef)
-
-  // booksContainer = {
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   border: 'solid 2px black',
-  //   width: '500px',
-  //   alignItems: 'center'
-  // }
-  // inputStyle = {
-  //   margin: '10px',
-  //   padding: '10px',
-  //   width: '180px'
-  // }
-
   goToBookDetails(book: IBook) {
     console.table(book)
   }
