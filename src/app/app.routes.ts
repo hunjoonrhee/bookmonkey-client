@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import {AboutComponent} from "./about/about.component";
+import {BookNewComponent} from "./book/book-new/book-new.component";
+import {authGuard} from "./book/auth.guard";
 
 export const routes: Routes = [
     {
