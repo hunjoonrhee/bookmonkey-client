@@ -1,12 +1,11 @@
-
-    <h2>Welcome to my Book Store</h2>
-    <input type="text" (input)="updateBookSearchTerm($event)" placeholder="Filter books..."/>
-    <hr />
-    @if (bookSearchTerm) {
-        <app-book-card [content]="book" *ngFor="let book of books$ | async | bookFilter: bookSearchTerm"
-                       (detailClick)="goToBookDetails(book)"/>
-    } @else {
-        <app-book-card [content]="book" *ngFor="let book of books$ | async"
-                       (detailClick)="goToBookDetails(book)"/>
-    }
+<h2>Welcome to my Book Store</h2>
+<input type="text" (input)="updateBookSearchTerm($event)" placeholder="Filter books..."/>
+<hr />
+@if (bookSearchTerm) {
+    <app-book-card [content]="book" *ngFor="let book of books$ | async | bookFilter: bookSearchTerm"
+                   (detailClick)="goToBookDetails($event)"/>
+} @else {
+    <app-book-card [content]="book" *ngFor="let book of books$ | async"
+                   (detailClick)="goToBookDetails($event)"/>
+}
 

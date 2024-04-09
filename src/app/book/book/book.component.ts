@@ -6,6 +6,7 @@ import {BookFilterPipe} from "../book-filter/book-filter.pipe";
 import {BookApiService} from "../book-api.service";
 import {Observable, Subscription} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-book',
@@ -19,10 +20,12 @@ export class BookComponent {
 
   private subscription = Subscription.EMPTY
   private bookApiService = inject(BookApiService)
+  private router = inject(Router);
   books$: Observable<IBook[]> = this.bookApiService.getAll();
   bookSearchTerm?: string;
   goToBookDetails(book: IBook) {
-    console.table(book)
+    console.log(book)
+    this.router.navigate(['books', 'detail', book.isbn])
   }
 
   updateBookSearchTerm(e: Event): string {
