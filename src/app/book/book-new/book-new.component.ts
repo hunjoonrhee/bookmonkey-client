@@ -4,6 +4,7 @@ import {JsonPipe, NgIf} from "@angular/common";
 import {IBook} from "../book";
 import {BookApiService} from "../book-api.service";
 import {take} from "rxjs";
+import {validAuthorName} from "../validators/author.validator";
 
 @Component({
   selector: 'app-book-new',
@@ -16,7 +17,7 @@ import {take} from "rxjs";
 export class BookNewComponent {
   bookForm = inject(NonNullableFormBuilder).group({
         title: ['', [Validators.required], []],
-        author: ['', []],
+        author: ['', [validAuthorName()]],
         abstract: ['', []],
         subtitle: ['', []],
         isbn: [
@@ -46,4 +47,5 @@ export class BookNewComponent {
     console.log("submitted!")
   }
 
+  protected readonly validAuthorName = validAuthorName;
 }
