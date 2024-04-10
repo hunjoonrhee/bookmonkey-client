@@ -1,8 +1,23 @@
 <form [formGroup]="bookForm" (ngSubmit)="submit()">
-    <input type="text" formControlName="author" placeholder="Author"/> <br />
-    <input type="text" formControlName="title" placeholder="Title"/> <br />
+    <input type="text" formControlName="author" placeholder="Author"/>
+    <small *ngIf="bookForm.get('author')?.dirty
+            && bookForm.get('author')?.hasError('required')">
+                    Please insert a author
+    </small>
+    <br />
+    <input type="text" formControlName="title" placeholder="Title"/>
+    <small *ngIf="bookForm.get('title')?.dirty
+            && bookForm.get('title')?.hasError('required')">
+        Please insert a title
+    </small>
+    <br />
     <input type="text" formControlName="abstract" placeholder="Abstract"/> <br />
-    <input type="text" formControlName="isbn" placeholder="ISBN"/> <br />
-    <button type="submit">Save</button>
+    <input type="text" formControlName="isbn" placeholder="ISBN"/>
+    <small *ngIf="bookForm.get('isbn')?.dirty
+            && bookForm.get('isbn')?.hasError('minLength')">
+        Please insert a ISBN of the book
+    </small>
+    <br />
+    <button type="submit" [disabled]="bookForm.invalid" >Save</button>
 </form>
 <pre>{{bookForm.value | json}}</pre>
