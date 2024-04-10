@@ -1,6 +1,9 @@
 import {Component, inject} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators, NonNullableFormBuilder} from "@angular/forms";
 import {JsonPipe, NgIf} from "@angular/common";
+import {IBook} from "../book";
+import {BookApiService} from "../book-api.service";
+import {take} from "rxjs";
 
 @Component({
   selector: 'app-book-new',
@@ -9,14 +12,25 @@ import {JsonPipe, NgIf} from "@angular/common";
   templateUrl: './book-new.component.html',
   styleUrl: './book-new.component.scss'
 })
+
 export class BookNewComponent {
-  bookForm = inject(FormBuilder).group({
-    author: ['', [Validators.required]],
-    title: ['', [Validators.required]],
-    isbn: ['', [Validators.required, Validators.minLength(13)], []],
-    abstract: ['', []],
-    }
+  bookForm = inject(NonNullableFormBuilder).group({
+        title: ['', [Validators.required], []],
+        author: ['', []],
+        abstract: ['', []],
+        subtitle: ['', []],
+        isbn: [
+          '',
+          [Validators.required, Validators.minLength(13), Validators.maxLength(13)],
+          [],
+        ],
+        numPages: [0, []],
+        publisher: ['', []],
+        price: ['', []],
+        cover: ['', []],
+      }
   )
+  private bookApiService = inject(BookApiService)
 
   constructor() {
     this.bookForm.controls.title.valueChanges.subscribe({
@@ -27,6 +41,7 @@ export class BookNewComponent {
 
 
   submit() {
+    this.bookApiService.createABook(this.bookForm.getRawValue() as IBook).subscribe()
     console.log(this.bookForm.value);
     console.log("submitted!")
   }
