@@ -3,11 +3,13 @@
 <hr />
 <a routerLink="/books/new">New</a>
 <hr />
+{{numberOfBooks()}}
+<hr />
 @if (bookSearchTerm) {
-    <app-book-card [content]="book" *ngFor="let book of books$ | async | bookFilter: bookSearchTerm"
+    <app-book-card [content]="book" *ngFor="let book of books() | bookFilter: bookSearchTerm"
                    (detailClick)="goToBookDetails($event)"/>
 } @else {
-    <app-book-card [content]="book" *ngFor="let book of books$ | async"
+    <app-book-card [content]="book" *ngFor="let book of books()"
                    (detailClick)="goToBookDetails($event)"/>
 }
 
